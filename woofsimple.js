@@ -22,7 +22,9 @@ var o_Xanthippe = {};
 	this.North = North; this.South = South; this.East = East; this.West = West;
 };
 
-var TheNorth = new Location("You are in the North.",[o_MOVE],[o_Pebble],[o_Moe],undefined,TheCenter,undefined,undefined);
+var TheNorth = new Location(
+		"You are in the North.",["MOVE to a different location","PICK up an object","TALK with a person"],
+		[o_Pebble],[o_Moe],undefined,TheCenter,undefined,undefined);
 var TheSouth = new Location("You are in the South.",[o_MOVE],[o_Pebble],[o_Moe],TheCenter,undefined,undefined,undefined);
 var TheEast = new Location("You are in the East.",[o_MOVE],[o_Cellphone],[o_Xanthippe],undefined,undefined,undefined,TheCenter);
 var TheWest = new Location("You are in the West.",[o_MOVE],[o_Cellphone],[o_Xanthippe],undefined,undefined,TheCenter,undefined);
@@ -45,8 +47,9 @@ var mainCharacter = {
 			document.getElementById('mainInput').value = "";	
 			document.getElementById("textoutput1").innerHTML = MClocationdescription;
 			document.getElementById("textoutput2").innerHTML = "You can move either North, South, East, or West.";
-			document.getElementById("textoutput3").innerHTML = "";
-			document.getElementById("textoutput4").innerHTML = "";
+			document.getElementById("textoutput3").innerHTML = "Type N, S, E, or W to move.";
+			document.getElementById("textoutput4").innerHTML = "Or you can do one of the following actions:";
+			document.getElementById("textoutput5").innerHTML = "Talk with a Person ";
 			takeAction();
 			}
 };
@@ -91,24 +94,37 @@ function takeAction() {
 	}
 };
 
+
 function newGame1() {
+
+var MovingForward = function() {
+	mainCharacter.name = userName;
+	mainCharacter.location = TheCenter;
+	console.log(mainCharacter.location);
+	var uname = document.getElementById('mainInput').value;
+	document.getElementById("textoutput1").innerHTML = "Welcome " + uname + "!";
+	document.getElementById("textoutput2").innerHTML =	"Your favorite dog WoofWoof has gone missing!";
+	document.getElementById("textoutput3").innerHTML =	"Would you like to search for WoofWoof?";
+	document.getElementById("textoutput4").innerHTML =	"Please type Yes or No!";
+	document.getElementById("textoutput5").innerHTML =	"Or you can type EXIT at any time to exit the game.";
+	document.getElementById('mainInput').value = "";
+	newGame2();
+	};
+
 	document.getElementById("textoutput1").innerHTML = "Hello and welcome to the WoofWoof Game! What is your name?";
+
+// getting input from the input box triggered by either button press or return keypress
 	var userName = document.getElementById('mainInput');
 	var button = document.getElementById('mainInputButton');
-	button.onclick = function() {
-		mainCharacter.name = userName;
-		mainCharacter.location = TheCenter;
-		console.log(mainCharacter.location);
-		var uname = document.getElementById('mainInput').value;
-		document.getElementById("textoutput1").innerHTML = "Welcome " + uname + "!";
-		document.getElementById("textoutput2").innerHTML =	"Your favorite dog WoofWoof has gone missing!";
-		document.getElementById("textoutput3").innerHTML =	"Would you like to search for WoofWoof?";
-		document.getElementById("textoutput4").innerHTML =	"Please type Yes or No!";
-		document.getElementById("textoutput5").innerHTML =	"Or you can type EXIT at any time to exit the game.";
-		document.getElementById('mainInput').value = "";
-	newGame2();
-	}
-};
+
+	button.onClick = MovingForward();
+	document.addEventListener('keypress', function(event) {
+	  if (event.which === 13) {MovingForward();
+  }
+});
+
+
+}; // end of function newGame1
 
 function newGame2() {
 	var button = document.getElementById('mainInputButton');
