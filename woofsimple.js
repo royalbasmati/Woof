@@ -59,23 +59,33 @@ function takeAction() {
 		var newAction = document.getElementById('mainInput').value;
 		switch (newAction) {
 		case "North" : case "NORTH" : case "north" : case "N" : case "n" :
-		if (mainCharacter.whereYouAre.North) {mainCharacter.whereYouAre = mainCharacter.whereYouAre.North}
+		if (mainCharacter.whereYouAre.North) {mainCharacter.whereYouAre = mainCharacter.whereYouAre.North;
+		mainCharacter.getCurrentLocation();}
 			else {alert("You can't go any further North from here!")};
 		break;
 		case "South" : case "SOUTH" : case "south" : case "S" : case "s" :
-		if (mainCharacter.whereYouAre.South) {mainCharacter.whereYouAre = mainCharacter.whereYouAre.South}
+		if (mainCharacter.whereYouAre.South) {mainCharacter.whereYouAre = mainCharacter.whereYouAre.South;
+		mainCharacter.getCurrentLocation();}
 			else {alert("You can't go any further South from here!")};
 		break;
 		case "East" : case "EAST" : case "east" : case "E" : case "e" :
-		if (mainCharacter.whereYouAre.East) {mainCharacter.whereYouAre = mainCharacter.whereYouAre.East}
+		if (mainCharacter.whereYouAre.East) {mainCharacter.whereYouAre = mainCharacter.whereYouAre.East;
+		mainCharacter.getCurrentLocation();}
 			else {alert("You can't go any further East from here!")};
 		break;
 		case "West" : case "WEST" : case "west" : case "W" : case "w" :
-		if (mainCharacter.whereYouAre.West) {mainCharacter.whereYouAre = mainCharacter.whereYouAre.West}
+		if (mainCharacter.whereYouAre.West) {mainCharacter.whereYouAre = mainCharacter.whereYouAre.West;
+		mainCharacter.getCurrentLocation();}
 			else {alert("You can't go any further West from here!")};
 		break;
-		mainCharacter.getCurrentLocation();
-		case "EXIT" : case "exit" : case "Exit" : break;
+		case "EXIT" : case "exit" : case "Exit" : 
+			document.getElementById('mainInput').value = "";	
+			document.getElementById("textoutput1").innerHTML = "The game is over!"
+			document.getElementById("textoutput2").innerHTML = "Come back soon!";
+			document.getElementById("textoutput3").innerHTML = "";
+			document.getElementById("textoutput4").innerHTML = "";
+			document.getElementById("textoutput4").innerHTML = "";
+		break;
 		default : "Please type NORTH, SOUTH, EAST or WEST - or EXIT to leave the game.";	
 		}
 	}
